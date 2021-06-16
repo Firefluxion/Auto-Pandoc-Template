@@ -33,7 +33,7 @@ jobs:
       - name: Create MakeFileList
         run: docker exec -i localcontainer sh -c "find ./ -name 'Makefile' -type f > MakeFileList.txt"
       - name: Echo MakeFiles
-        run: docker exec -i localcontainer sh -c "sudo while IFS=read -r line; do echo $line; done < MakeFileList.txt"
+        run: docker exec -i localcontainer sh -c "while IFS= read -r line; do echo ${line}; done < MakeFileList.txt"
      # - name: convert md to docx
      #   run: docker exec -i localcontainer sh -c "find ./ -name 'Makefile' -type f -exec sh -c 'cd ${1}/.. && make BUILDDIR=/workspaces/Auto-Pandoc-Template/output github-action' {} \;"
       - name: test output
