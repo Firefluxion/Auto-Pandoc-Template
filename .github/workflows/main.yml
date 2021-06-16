@@ -22,7 +22,7 @@ jobs:
         run: > 
           docker exec -i localcontainer sh -c "
           for d in */; do
-            mkdir -p output/$d
+            mkdir -p output/$d && cat > output/$d/foo.txt
           done"
 #      - name: convert md to docx
 #        run: |
