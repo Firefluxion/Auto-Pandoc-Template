@@ -1,6 +1,9 @@
 name: Makefile Output
 on: push
 
+env:
+  WorkDir: '/workspaces/Auto-Pandoc-Template/'
+
 jobs:
   convert_via_pandoc:
     runs-on: ubuntu-latest
@@ -13,7 +16,7 @@ jobs:
       - name: list docker images
         run: docker images
       - name: Run docker image
-        run: docker run --name localcontainer --workdir '/workspaces/Auto-Pandoc-Template/' -d local
+        run: docker run --name localcontainer --workdir {{ WorkDir }} -d local
       - name: list docker containers
         run: docker container ls
       - name: create workdir
