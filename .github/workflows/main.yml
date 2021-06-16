@@ -13,9 +13,9 @@ jobs:
       - name: list docker images
         run: docker images
       - name: Run docker image
-        run: docker run -i local
+        run: docker run -i -a stdin local
       - name: test inside container
-        run: docker exec local -c 'pandoc --version'
+        run: pandoc --version
 #      - name: prepare output directories
 #        run: |
 #          for d in */; do
