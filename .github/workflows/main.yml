@@ -27,7 +27,7 @@ jobs:
 #      - name: convert md to docx
 #        run: |
 #          find ./ -name 'Makefile' -type f -exec sh -c 'cd ${0}/.. && make BUILDDIR=/workspaces/Auto-Pandoc-Template/output github-action' {} \;
-#      - uses: actions/upload-artifact@master
-#        with:
-#          name: output
-#          path: output
+      - uses: actions/upload-artifact@master
+        with:
+          name: output
+          path: output
