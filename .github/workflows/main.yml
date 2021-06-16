@@ -12,12 +12,14 @@ jobs:
         run: ls
       - name: list docker images
         run: docker images
-      - name: Run docker image
-        run: docker run -d local
-      - name: list docker containers
-        run: docker container ls
-      - name: test inside container
-        run: docker exec localcontainer -c 'pandoc --version'
+      - uses: docker/build-push-action@v2
+        with:
+          tags: local:latest
+          push: false
+      - uses: addnab/docker-run-action@v3
+        with:
+          image: local:latest
+          run: echo "hello world"
 #      - name: prepare output directories
 #        run: |
 #          for d in */; do
