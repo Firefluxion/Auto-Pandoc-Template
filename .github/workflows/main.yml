@@ -30,15 +30,14 @@ jobs:
           for d in */; do
             mkdir -p output/$d && 'cat' > output/$d/foo.txt
           done"
+      - name: convert md to docx
+        run: docker exec -i localcontainer sh -c "find ./ -name 'Makefile' -type f -exec sh -c 'cd ${0}/.. && make BUILDDIR=/workspaces/Auto-Pandoc-Template/output github-action' {} \;"
       - name: test output
         run: docker exec -i localcontainer sh -c "ls output"
       - name: find all output dirs
         run: docker exec -i localcontainer sh -c "find / -name 'output'"
-#      - name: convert md to docx
-#        run: |
-#          find ./ -name 'Makefile' -type f -exec sh -c 'cd ${0}/.. && make BUILDDIR=/workspaces/Auto-Pandoc-Template/output github-action' {} \;
-      - name: copy output to host
-        run: docker cp localcontainer:/workspaces/Auto-Pandoc-Template/output ./output
+#      - name: copy output to host
+#        run: docker cp localcontainer:/workspaces/Auto-Pandoc-Template/output ./output
       - uses: actions/upload-artifact@master
         with:
           name: output
