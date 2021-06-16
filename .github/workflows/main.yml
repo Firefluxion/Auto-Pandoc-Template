@@ -40,8 +40,8 @@ jobs:
         run: docker exec -i localcontainer sh -c "ls output"
       - name: find all output dirs
         run: docker exec -i localcontainer sh -c "find / -name 'output'"
-#      - name: copy output to host
-#        run: docker cp localcontainer:/workspaces/Auto-Pandoc-Template/output ./output
+      - name: copy output to host
+        run: docker cp localcontainer:/workspaces/Auto-Pandoc-Template/output ./output
       - uses: actions/upload-artifact@master
         with:
           name: output
