@@ -13,11 +13,11 @@ jobs:
       - name: list docker images
         run: docker images
       - name: Run docker image
-        run: docker run -i -a stdin local
+        run: docker run --name localcontainer -i -a stdin local
       - name: list docker containers
         run: docker container ls
       - name: test inside container
-        run: docker exec local -c 'pandoc --version'
+        run: docker exec localcontainer -c 'pandoc --version'
 #      - name: prepare output directories
 #        run: |
 #          for d in */; do
