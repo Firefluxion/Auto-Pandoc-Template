@@ -13,7 +13,9 @@ urlcolor: "blue"
 \pagebreak
 \pagenumbering{arabic}
 
-# This is a Test!
+# This is a test!
+
+## This is a test of a subtitle
 
 # Image
 ![Description \label{fig:1}](http://via.placeholder.com/800x400)
