@@ -1,6 +1,7 @@
 FROM pandoc/latex:2.14.0.2
 
 RUN apk --no-cache add make
+RUN apk --no-cache add wkhtmltopdf
 
 # Install Microsoft True Type Fonts
 RUN apk --no-cache add msttcorefonts-installer fontconfig && \
