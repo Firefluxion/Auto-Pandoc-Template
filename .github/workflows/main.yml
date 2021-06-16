@@ -17,7 +17,7 @@ jobs:
       - name: list docker containers
         run: docker container ls
       - name: create workdir
-        run: docker exec -i localcontainer sh -c "mkdir /workspaces/Auto-Pandoc-Template/"
+        run: docker exec -i localcontainer sh -c "mkdir -p /workspaces/Auto-Pandoc-Template/"
       - name: copy all to container
         run: docker cp . localcontainer:/workspaces/Auto-Pandoc-Template/.
       - name: test inside container
