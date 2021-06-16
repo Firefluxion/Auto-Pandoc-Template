@@ -4,10 +4,12 @@ on: push
 jobs:
   convert_via_pandoc:
     runs-on: ubuntu-latest
-    container: 
-        image: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
     steps:
       - uses: actions/checkout@v2
+      - name: Build docker images
+        run: docker build -t local < .devcontainer/Dockerfile
+      - name: Run tests
+        run: docker run -it -v $PWD:/srv -w/srv local make github-action
       - name: prepare output directories
         run: |
           for d in */; do
