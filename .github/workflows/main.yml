@@ -18,11 +18,11 @@ jobs:
         run: docker container ls
       - name: test inside container
         run: docker exec -i localcontainer sh -c "ls && pandoc --version"
-#      - name: prepare output directories
-#        run: |
-#          for d in */; do
-#            mkdir -p output/$d
-#          done
+      - name: prepare output directories
+        run: docker exec -i localcontainer sh -c |
+          for d in */; do
+            mkdir -p output/$d
+          done
 #      - name: convert md to docx
 #        run: |
 #          find ./ -name 'Makefile' -type f -exec sh -c 'cd ${0}/.. && make BUILDDIR=/workspaces/Auto-Pandoc-Template/output github-action' {} \;
