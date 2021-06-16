@@ -6,3 +6,6 @@ RUN apk --no-cache add make
 RUN apk --no-cache add msttcorefonts-installer fontconfig && \
     update-ms-fonts && \
     fc-cache -f
+    
+ENTRYPOINT tail -f /dev/null
+CMD [ "/bin/bash" ]
