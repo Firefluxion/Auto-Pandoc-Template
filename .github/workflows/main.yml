@@ -13,7 +13,7 @@ jobs:
       - name: list docker images
         run: docker images
       - name: Run docker image
-        run: docker run -it local
+        run: docker run -i local
 #      - name: prepare output directories
 #        run: |
 #          for d in */; do
