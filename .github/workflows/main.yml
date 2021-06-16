@@ -9,7 +9,7 @@ jobs:
       - name: Build docker images
         run: docker build . --tag local --file .devcontainer/Dockerfile
       - name: Run tests
-        run: docker run -it -v $PWD:/srv -w/srv local make github-action
+        run: docker run -t local make github-action
       - name: prepare output directories
         run: |
           for d in */; do
