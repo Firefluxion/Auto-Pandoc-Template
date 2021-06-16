@@ -17,7 +17,7 @@ jobs:
       - name: list docker containers
         run: docker container ls
       - name: copy all to container
-        run: docker exec -i localcontainer sh -c "cp . localcontainer:/."
+        run: docker cp . localcontainer:/.
       - name: test inside container
         run: docker exec -i localcontainer sh -c "ls && pandoc --version"
       - name: prepare output directories
