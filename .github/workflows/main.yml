@@ -10,8 +10,6 @@ jobs:
         run: docker build . --tag local --file .devcontainer/Dockerfile
       - name: ls
         run: ls
-      - name: test outside container
-        run: pandoc --version
       - name: list docker images
         run: docker images
       - name: Run docker image
