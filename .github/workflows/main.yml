@@ -11,22 +11,12 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build docker image
         run: docker build . --tag local --file .devcontainer/Dockerfile
-      - name: ls
-        run: ls
-      - name: list docker images
-        run: docker images
       - name: Run docker image
         run: docker run --name localcontainer --workdir ${{ env.WorkDir }} -d local
-      - name: list docker containers
-        run: docker container ls
       - name: create workdir
         run: docker exec -i localcontainer sh -c "mkdir -p ${{ env.WorkDir }}"
       - name: copy all to container
         run: docker cp . localcontainer:${{ env.WorkDir }}.
-      - name: test inside container
-        run: docker exec -i localcontainer sh -c "find / -name 'essay.md'"
-      - name: ls / docker
-        run: docker exec -i localcontainer sh -c "ls"
       - name: prepare output directories
         run: > 
           docker exec -i localcontainer sh -c "
@@ -35,14 +25,8 @@ jobs:
           done"
       - name: Create MakeFileList
         run: docker exec -i localcontainer sh -c "find ./ -name 'Makefile' -type f > MakeFileList.txt"
-      - name: Echo MakeFiles
-        run: docker exec -i localcontainer sh -c "while IFS= read -r line; do echo $"{line}"; done < MakeFileList.txt"
-      - name: convert md to docx
+      - name: Execute make github-action for all Makefiles
         run: docker exec -i localcontainer sh -c "while IFS= read -r line; do cd $"{line}"/.. && make BUILDDIR=${{ env.WorkDir }}output github-action; done < MakeFileList.txt"
-      - name: test output
-        run: docker exec -i localcontainer sh -c "ls output"
-      - name: find all output dirs
-        run: docker exec -i localcontainer sh -c "find / -name 'output'"
       - name: copy output to host
         run: docker cp localcontainer:${{ env.WorkDir }}output ./output
       - uses: actions/upload-artifact@master
