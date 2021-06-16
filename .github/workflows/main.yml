@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build docker images
-        run: docker build -f .devcontainer/Dockerfile local
+        run: docker build --tag local -f .devcontainer/Dockerfile
       - name: Run tests
         run: docker run -it -v $PWD:/srv -w/srv local make github-action
       - name: prepare output directories
