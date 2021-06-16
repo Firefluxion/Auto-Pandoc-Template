@@ -14,7 +14,7 @@ jobs:
         run: docker images
       - name: Run docker image
         run: docker run --entrypoint "/bin/sh" -i local
-      - name: list docker containers
+      - name: list docker containers --all
         run: docker container ls
       - name: test inside container
         run: docker exec localcontainer -c 'pandoc --version'
