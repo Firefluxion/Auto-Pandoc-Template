@@ -1,0 +1,22 @@
+name: Makefile Output
+on: push
+
+jobs:
+  convert_via_pandoc:
+    runs-on: ubuntu-latest
+    container:
+      image: 'Dockerfile'
+    steps:
+      - uses: actions/checkout@v2
+      - name: prepare output directories
+        run: |
+          for d in */; do
+            mkdir -p output/$d
+          done
+      - name: convert md to docx
+        run: |
+          find ./ -name 'Makefile' -type f -exec sh -c 'cd ${0}/.. && make BUILDDIR=/workspaces/Auto-Pandoc-Template/output github-action' {} \;
+      - uses: actions/upload-artifact@master
+        with:
+          name: output
+          path: output
