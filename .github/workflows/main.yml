@@ -13,7 +13,7 @@ jobs:
       - name: list docker images
         run: docker images
       - name: Run docker image
-        run: docker run --name localcontainer -i -a stdin local
+        run: docker run --name localcontainer -d local
       - name: list docker containers
         run: docker container ls
       - name: test inside container
