@@ -20,6 +20,8 @@ jobs:
         run: docker cp . localcontainer:.
       - name: test inside container
         run: docker exec -i localcontainer sh -c "find / -name 'essay.md'"
+      - name: ls / docker
+        run: docker exec -i localcontainer sh -c "ls /"
       - name: prepare output directories
         run: > 
           docker exec -i localcontainer sh -c "
