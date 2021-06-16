@@ -20,9 +20,9 @@ jobs:
       - name: list docker containers
         run: docker container ls
       - name: create workdir
-        run: docker exec -i localcontainer sh -c "mkdir -p /workspaces/Auto-Pandoc-Template/"
+        run: docker exec -i localcontainer sh -c "mkdir -p ${{ env.WorkDir }}"
       - name: copy all to container
-        run: docker cp . localcontainer:/workspaces/Auto-Pandoc-Template/.
+        run: docker cp . localcontainer:${{ env.WorkDir }}.
       - name: test inside container
         run: docker exec -i localcontainer sh -c "find / -name 'essay.md'"
       - name: ls / docker
@@ -38,13 +38,13 @@ jobs:
       - name: Echo MakeFiles
         run: docker exec -i localcontainer sh -c "while IFS= read -r line; do echo $"{line}"; done < MakeFileList.txt"
       - name: convert md to docx
-        run: docker exec -i localcontainer sh -c "while IFS= read -r line; do cd $"{line}"/.. && make BUILDDIR=/workspaces/Auto-Pandoc-Template/output github-action; done < MakeFileList.txt"
+        run: docker exec -i localcontainer sh -c "while IFS= read -r line; do cd $"{line}"/.. && make BUILDDIR=${{ env.WorkDir }}output github-action; done < MakeFileList.txt"
       - name: test output
         run: docker exec -i localcontainer sh -c "ls output"
       - name: find all output dirs
         run: docker exec -i localcontainer sh -c "find / -name 'output'"
       - name: copy output to host
-        run: docker cp localcontainer:/workspaces/Auto-Pandoc-Template/output ./output
+        run: docker cp localcontainer:${{ env.WorkDir }}output ./output
       - uses: actions/upload-artifact@master
         with:
           name: output
