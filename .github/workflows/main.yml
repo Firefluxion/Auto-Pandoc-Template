@@ -32,9 +32,13 @@ jobs:
           done"
       - name: test output
         run: docker exec -i localcontainer sh -c "ls output"
+      - name: find all output dirs
+        run: docker exec -i localcontainer sh -c "find / -name 'output'"
 #      - name: convert md to docx
 #        run: |
 #          find ./ -name 'Makefile' -type f -exec sh -c 'cd ${0}/.. && make BUILDDIR=/workspaces/Auto-Pandoc-Template/output github-action' {} \;
+      #- name: copy output to host
+      #  run: docker cp localcontainer:/wor
       - uses: actions/upload-artifact@master
         with:
           name: output
