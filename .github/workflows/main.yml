@@ -3,9 +3,9 @@ on: push
 
 jobs:
   convert_via_pandoc:
-    runs-on: docker
-    container:
-      image: 'Dockerfile'
+    runs-on: ubuntu-latest
+    container: 
+        image: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
     steps:
       - uses: actions/checkout@v2
       - name: prepare output directories
