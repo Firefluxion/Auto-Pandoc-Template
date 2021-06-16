@@ -38,7 +38,7 @@ jobs:
 #        run: |
 #          find ./ -name 'Makefile' -type f -exec sh -c 'cd ${0}/.. && make BUILDDIR=/workspaces/Auto-Pandoc-Template/output github-action' {} \;
       #- name: copy output to host
-      #  run: docker cp localcontainer:/wor
+      #  run: docker cp localcontainer:/workspaces/Auto-Pandoc-Template/output /output
       - uses: actions/upload-artifact@master
         with:
           name: output
